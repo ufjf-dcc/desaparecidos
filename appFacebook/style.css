@@ -1,0 +1,324 @@
+*{margin:0;padding:0;border:0;}
+
+body{
+    color: #333333;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    line-height: 1.28;
+    text-align: left;
+    background:#EFEFEF;
+}
+
+.clear{clear:both;}
+
+a{
+    font-size: 11px;
+    font-weight: bold;
+    color: #3B5998;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover{text-decoration: underline;}
+
+
+#mural{
+}
+
+
+.header{
+    background: none repeat scroll 0 0 #EFEFEF;
+    border-bottom: 1px solid #E0E0E0;
+    border-left: 3px solid #23599F;
+    height: 58px;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+
+.relative-position{
+    position: relative;
+}
+
+#wrap{
+    background: none repeat scroll 0 0 #EFEFEF;
+    margin: 0 auto;
+    padding-top: 31px;
+    position: relative;
+}
+
+.top-border{
+    background: none repeat scroll 0 0 #3B5998;
+    height: 8px;
+    left: -1px;
+    position: absolute;
+    top: -5px;
+}
+
+#wrap .btn-login{
+    cursor: pointer;
+    left: 62px;
+    position: absolute;
+    top: 31px;
+    z-index: 8;
+}
+
+#mural .load{    
+    font-weight: bold;
+    text-align: center;
+    padding-top: 15px;
+    margin-top:100px;
+    display: none;
+}
+
+#mural .msg-app,
+#mural .msg-login{
+    font-weight: bold;
+    text-align: center;
+    padding-top: 15px;
+    margin-top:100px;
+    display: none;
+}
+
+#mural .load img{    
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+#mural .item{
+    background:#F7F7F7;
+    padding:6px;
+    border-bottom: 1px solid #E0E0E0;
+    position: relative;
+    border-left: 3px solid #23599F;
+}
+
+#mural .item:hover{
+    background:#F7F5E6;
+}
+
+#mural .item .icon{
+    background: none repeat scroll 0 0 #F4F4F4;
+    border-bottom: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#mural .item .msg-picture{
+    border: 1px solid #E2E2E2;
+    display: block;
+    float: left;
+    margin-right: 8px;
+    padding: 2px;
+}
+
+#mural .item .msg-picture:hover,
+#mural .item .msg-picture:active{
+    border-color:#8698BE;
+}
+
+#mural .picture{
+    float: left;
+    margin-right: 4px;
+}
+
+#mural .name{  }
+#mural .date{ color:#8E8E8E; font-size: 10px; }
+#mural .story{ padding-left: 33px; padding-top: 4px; }
+
+#info{
+    left: 6px;
+    position: absolute;
+    top: 6px;
+    width: 300px;
+}
+
+#info .picture{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #B7B7B7;
+    float: left;
+    margin-right: 9px;
+}
+
+#info .name{
+    display: block;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.des-search{
+    display: none;
+    font-size: 10px;
+    line-height: 11px;
+    position: absolute;
+    right: 33px;
+    text-align: left;
+    top: 31px;
+    width: 132px;
+}
+
+.des-result{
+    color: #282828;
+    cursor: pointer;
+    display: none;
+    font-size: 10px;
+    height: 26px;
+    left: 129px;
+    line-height: 11px;
+    position: absolute;
+    text-align: left;
+    top: 29px;
+    width: 128px;
+}
+
+.des-result b{
+    font-weight: bold;
+    color: #3B5998;
+}
+
+.des-search img{
+    float: left;
+    margin-right: 7px;
+    margin-top: 4px;
+}
+
+.item-green{
+    background:#C1EA98 !important;
+}
+
+.view-about{
+    background: url("images/background-black.png") repeat scroll 0 0 transparent;
+    display: none;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.view-about .content{
+    background: none repeat scroll 0 0 #F7F7F7;
+    height: 80%;
+    margin: 20px;
+    padding: 6px;
+    overflow-y: auto;
+}
+
+
+
+
+.view-about .content .item{
+    background:#F7F7F7;
+    padding:6px;
+    border-bottom: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
+    border-right: 1px solid #E0E0E0;
+    position: relative;
+}
+
+.view-about .content .item:hover{
+    background:#F7F5E6;
+}
+
+.view-about .content .item .icon{
+    background: none repeat scroll 0 0 #F4F4F4;
+    border-bottom: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.view-about .content .item .msg-picture{
+    border: 1px solid #E2E2E2;
+    display: block;
+    float: left;
+    margin-right: 8px;
+    padding: 2px;
+}
+
+.view-about .content .item .msg-picture:hover,
+.view-about .content .item .msg-picture:active{
+    border-color:#8698BE;
+}
+
+.view-about .content .picture{
+    float: left;
+    margin-right: 4px;
+}
+
+.view-about .content .name{  }
+.view-about .content .date{ color:#8E8E8E; font-size: 10px; }
+.view-about .content .story{ padding-left: 33px; padding-top: 4px; }
+
+.view-about .content .fechar{
+    color: #FFF;
+    font-size: 11px;
+    padding:8px;
+    background:#FF9400;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.view-about .content p{
+    font-size: 13px;
+    line-height: 19px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.view-about .logo-ufjf{
+    display: block;
+    margin:15px auto;
+}
+
+.view-about .content p a{
+    text-decoration: none;
+}
+
+.view-about .content .fechar:active{ background: #FF6A00; }
+
+.status{
+    background: none repeat scroll 0 0 #3B5998;
+    bottom: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 11px;
+    padding: 7px;
+    position: absolute;
+    right: 10px;
+}
+
+.status a{
+   color: #FFFFFF;
+   text-decoration: none;
+   font-weight: normal;
+}
+
+.status img{
+    float: left;
+    margin-top:3px;
+    margin-right: 6px;
+}
+
+.status .info{
+    display: none;
+}
+
+.btn-about{
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: -7px;
+    z-index: 999;
+}

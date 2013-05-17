@@ -1,0 +1,7 @@
+sparql
+
+prefix des: <http://localhost:8890/rdfschema/schemas/desaparecido#>
+
+create iri class des:desaparecido_iri 
+"http://localhost:8890/rdfschema/data/desaparecidos#%s"
+    (in id integer not null) .

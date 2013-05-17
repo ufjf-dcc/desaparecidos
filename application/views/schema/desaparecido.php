@@ -1,0 +1,69 @@
+define input:storage
+<http://localhost:8890/rdfschema/quad_storage/default>
+
+
+SELECT ?a WHERE {
+?a ?b ?c
+}
+
+
+
+sparql
+
+prefix qs: <http://localhost:8890/rdfschema/quad_storage/>
+prefix des: <http://localhost:8890/rdfschema/schemas/desaparecido#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+
+create quad storage qs:default
+  from DESAPARECIDOS.DBA.Pessoa as desaparecido_tbl
+{
+  create qs:desaparecidos as
+      graph <http://localhost:8890/rdfschema/data/desaparecidos#s>
+  {
+    des:desaparecido_iri(desaparecido_tbl.id) a des:Desaparecido
+        as qs:Desaparecido ;
+    foaf:name desaparecido_tbl.nome
+        as qs:nome ;
+    foaf:nick desaparecido_tbl.apelido
+        as qs:apelido ;
+	des:data_nascimento des:desaparecido_iri(desaparecido_tbl.data_nascimento)
+        as qs:data_nascimento ;
+    foaf:gender des:desaparecido_iri(desaparecido_tbl.sexo)
+        as qs:sexo ;
+	foaf:image desaparecido_tbl.imagem
+        as qs:imagem ;
+	foaf:age desaparecido_tbl.idade
+        as qs:idade ;
+	des:cidade des:desaparecido_iri(desaparecido_tbl.cidade)
+        as qs:cidade ;
+	des:estado des:desaparecido_iri(desaparecido_tbl.estado)
+        as qs:estado ;
+	des:altura des:desaparecido_iri(desaparecido_tbl.altura)
+        as qs:altura ;
+	des:peso des:desaparecido_iri(desaparecido_tbl.peso)
+        as qs:peso ;
+	des:pele des:desaparecido_iri(desaparecido_tbl.pele)
+        as qs:pele ;
+	des:cor_cabelo des:desaparecido_iri(desaparecido_tbl.cor_cabelo)
+        as qs:cor_cabelo ;
+	des:cor_olhos des:desaparecido_iri(desaparecido_tbl.cor_olhos)
+        as qs:cor_olhos ;
+	des:caracteristicas_diversas des:desaparecido_iri(desaparecido_tbl.caracteristicas_diversas)
+        as qs:caracteristicas_diversas ;
+	des:data_desaparecimento des:desaparecido_iri(desaparecido_tbl.data_desaparecimento)
+        as qs:data_desaparecimento ;
+	des:local_desaparecimento des:desaparecido_iri(desaparecido_tbl.local_desaparecimento)
+        as qs:local_desaparecimento ;
+	des:circunstancia_localizacao des:desaparecido_iri(desaparecido_tbl.circunstancia_localizacao)
+        as qs:circunstancia_localizacao ;
+	des:data_localizacao des:desaparecido_iri(desaparecido_tbl.data_localizacao)
+        as qs:data_localizacao ;
+	des:dados_complementares des:desaparecido_iri(desaparecido_tbl.dados_complementares)
+        as qs:dados_complementares ;
+	des:situacao des:desaparecido_iri(desaparecido_tbl.situacao)
+        as qs:situacao ;
+	des:fonte des:desaparecido_iri(desaparecido_tbl.fonte)
+        as qs:fonte .
+  } .
+
+} .
