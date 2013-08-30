@@ -52,8 +52,10 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
+/*
+Linha de comando para conexão com msyql
 $autoload['libraries'] = array('database');
-
+*/
 
 /*
 | -------------------------------------------------------------------

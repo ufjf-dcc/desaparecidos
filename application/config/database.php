@@ -47,7 +47,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-include '../properties.php';
+include 'properties.php';
 	
 	$dados = new Constant;
 
