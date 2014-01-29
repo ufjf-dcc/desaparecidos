@@ -47,10 +47,20 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'lgd$52$dgl';
-$db['default']['database'] = 'desaparecidos';
+include 'properties.php';
+
+$dados = new Constant;
+
+	$host = getProperty($dados->DB_HOST);
+	$user = getProperty($dados->DB_USER);
+	$pass = getProperty($dados->DB_PASS);
+	$desa = getProperty($dados->DB_DESA);
+
+
+$db['default']['hostname'] = '$host';//http://172.18.10.52:8890/conductor/
+$db['default']['username'] = '$user';//dba
+$db['default']['password'] = '$pass';//
+$db['default']['database'] = '$desa';//
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

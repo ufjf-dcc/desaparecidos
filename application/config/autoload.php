@@ -52,7 +52,10 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
+/*
+ Linha de comando para conexão com msql
 $autoload['libraries'] = array('database');
+*/ 
 
 
 /*

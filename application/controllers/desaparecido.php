@@ -24,6 +24,9 @@ class Desaparecido extends CI_Controller {
         //Defini os prefixos que serão usados
         $this->sparql->prefix("foaf", "http://xmlns.com/foaf/0.1/");
         $this->sparql->prefix("des", get_schema());
+        ///////////////////////Alterado///////////////////////////////
+        $this->sparql->prefix("dbpprop","http://dbpedia.org/property");
+        
         //Defini os campos quer serão exibidos
         $this->sparql->select("?id");
         $this->sparql->select("?nome");        
@@ -46,10 +49,14 @@ class Desaparecido extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
+        /////////////////////////Alterado///////////////////////////////
+        //$this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        ///////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
+        
+        
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
@@ -78,6 +85,9 @@ class Desaparecido extends CI_Controller {
         //Defini os prefixos que serão usados
         $this->sparql->prefix("foaf", "http://xmlns.com/foaf/0.1/");
         $this->sparql->prefix("des", get_schema());
+         ///////////////////////Alterado///////////////////////////////
+        $this->sparql->prefix("dbpprop","http://dbpedia.org/property");
+        
         //Defini os campos quer serão exibidos
         $this->sparql->select("?id");
         $this->sparql->select("?nome");        
@@ -98,7 +108,10 @@ class Desaparecido extends CI_Controller {
         //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        
+        ///////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
+        //
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
@@ -116,6 +129,7 @@ class Desaparecido extends CI_Controller {
             exit;
         }
         
+        $ID1 = '"'.$id.'"';
         //Carrega a classe de consulta no virtuoso
         $this->load->library('virtuoso_query');
         //Carrega a classe para gerar consultas sparql
@@ -153,7 +167,9 @@ class Desaparecido extends CI_Controller {
         $this->sparql->prefix("dbpprop", "http://dbpedia.org/property/");
 
         //Tripla quer será retornada - Está condição deve ser satisfeita para retornar um resultado
-        $this->sparql->new_ptrn("?recurso des:id $id");
+        
+        /////////////////////////Alterado///////////////////////////////
+        $this->sparql->new_ptrn("?recurso des:id $ID1");//$id
         
         foreach($fields as $key => $value){
             $this->sparql->select("?$value");
@@ -166,11 +182,15 @@ class Desaparecido extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://localhost:8890/sparql/');
+        /////////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
         
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+         ///////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
+        
+        
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
@@ -178,7 +198,10 @@ class Desaparecido extends CI_Controller {
         //$obj_json = $this->virtuoso_query->get_result();
 
         //Retorna como um objeto mais simples
-        $data['desaparecido'] = $this->virtuoso_query->convert_json_to_simple_object(0);
+        
+        ///////////////////////Alterado///////////////////////////////
+        $retorno = $this->virtuoso_query->convert_json_to_simple_object();
+        $data['desaparecido'] = $retorno[0];
 
         
         if(sizeof($data['desaparecido']) != 0){
@@ -197,11 +220,14 @@ class Desaparecido extends CI_Controller {
             exit;
         }
         
+        ////////////////////////////Alterado///////////////////////
+        $ID1 = '"'.$id.'"';
+        
         //Carrega a classe de consulta no virtuoso
         $this->load->library('virtuoso_query');
         //Carrega a classe para gerar consultas sparql
         $this->load->library('sparql');
-
+      
         //Montando a consulta SPARQL
 
         $fields =  array(
@@ -234,7 +260,7 @@ class Desaparecido extends CI_Controller {
         $this->sparql->prefix("dbpprop", "http://dbpedia.org/property/");
 
         //Tripla quer será retornada - Está condição deve ser satisfeita para retornar um resultado
-        $this->sparql->new_ptrn("?recurso des:id $id");
+        $this->sparql->new_ptrn("?recurso des:id $ID1");
         
         foreach($fields as $key => $value){
             $this->sparql->select("?$value");
@@ -247,11 +273,16 @@ class Desaparecido extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://localhost:8890/sparql/');
+        /////////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
         
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        
+       ///////////////////////Alterado///////////////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
+        
+       
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
@@ -259,10 +290,12 @@ class Desaparecido extends CI_Controller {
         //$obj_json = $this->virtuoso_query->get_result();
 
         //Retorna como um objeto mais simples
-        $desaparecido = $this->virtuoso_query->convert_json_to_simple_object(0);
+        ////////////////////Alterado//////////////////////////
+        //$desaparecido = $this->virtuoso_query->convert_json_to_simple_object(0);
+        $retorno[] = $this->virtuoso_query->convert_json_to_simple_object();
+        $desaparecido = $retorno[0];
 
-        
-        if(sizeof($desaparecido) != 0){                        
+        if(sizeof($desaparecido) != 0){
             $rdf = '<?xml version="1.0"?>
 <rdf:RDF
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -273,7 +306,7 @@ class Desaparecido extends CI_Controller {
 	xmlns:des="http://www.desaparecidos.com.br/rdf/">
 	
 	<rdf:description rdf:about="http://www.desaparecidos.ufjf.br/desaparecidos/' . $id . '">
-		<foaf:name>' . ((isset($desaparecido->nome))?$desaparecido->nome:""). '</foaf:name>
+		<foaf:name>' . ((isset($desaparecido->nome)) ? $desaparecido->nome : "vazio"). '</foaf:name>
 		<foaf:nick>' . ((isset($desaparecido->apelido))?$desaparecido->apelido:""). '</foaf:nick>
 		<foaf:birthday>' .((isset($desaparecido->data_nascimento))?$desaparecido->data_nascimento:"") . '</foaf:birthday>
 		<foaf:gender>' .((isset($desaparecido->sexo))?$desaparecido->sexo:""). '</foaf:gender>

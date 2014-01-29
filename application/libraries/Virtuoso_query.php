@@ -6,10 +6,10 @@ class Virtuoso_query {
     private $format;
     private $http;
     private $result;
-
+    //application/sparql-results+json
     function __construct() {
-        $this->format = 'application/json';
-        $this->http = 'http://localhost:8890/sparql/';
+        $this->format = 'application/sparql-results+json';
+        $this->http = 'http://172.18.40.9:10035/repositories/desaparecidos1';//http://localhost:8890/sparql/ //
     }
 
     public function load_query_sparql($query) {
@@ -37,12 +37,10 @@ class Virtuoso_query {
         $query = str_replace('(', 'asdgfasdfasdfasdf', $this->query);
         $query = str_replace(')', 'sgdfhsdfgwersdfas', $this->query);
         $params=array(
-		"default-graph-uri" => $this->graph,
-		"should-sponge" => "",
+	//	"default-graph-uri" => $this->graph,
+	//	"should-sponge" => "",
 		"query" => $query,
-		"format" => $this->format,
-		"debug" => "on",
-		"timeout" => ""
+	//	"debug" => "on",
 	);
 
 	$querypart="?";
@@ -53,9 +51,20 @@ class Virtuoso_query {
         $querypart = str_replace('asdgfasdfasdfasdf', '(', $querypart);
         $querypart = str_replace('sgdfhsdfgwersdfas', ')', $querypart);
         
+        
 	$sparqlURL = $this->http . $querypart;
-
-	$this->result = file_get_contents($sparqlURL);
+        
+        ///////////////////////////////////////////////////////////////////
+        /*Imprimindo o retorno */
+        echo "<pre>";
+       print_r($sparqlURL);
+        echo "</pre>";
+        ////////////////////////////////////////////////////////////////////
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $sparqlURL);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array("Accept: ".$this->format));
+        $this->result = curl_exec( $curl );
     }
 
     public function get_result(){
@@ -63,13 +72,13 @@ class Virtuoso_query {
     }
 
     public function convert_json_to_simple_object($result = -1){
-        if($this->format != 'application/json') {
-            echo "[erro] - O formato deve ser do tipo <strong>application/json</strong>.";
+        if($this->format != 'application/sparql-results+json') {
+            echo "[erro] - O formato deve ser do tipo <strong>application/sparql-results+json</strong>.";
             return array();
         }
         $objects = array();
         $results = json_decode($this->result);
-        foreach($results->results->bindings as $reg){
+     foreach($results->results->bindings as $reg){
             $obj = new stdClass();
             foreach($reg as $field => $value){
                 $obj->$field = $value->value;

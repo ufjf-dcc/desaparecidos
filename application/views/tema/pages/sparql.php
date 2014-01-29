@@ -3,13 +3,17 @@
 <h2><?php if(!empty($title)) echo $title; ?></h2>
 
 <div class="form">
+    <!-- 
+            ALTERADO
     <form method='GET' action='<?php url_virtuoso(true); ?>/sparql'>
     <input type="hidden" name="default-graph-uri" value="<?php get_graph(true); ?>" />
+    -->
+    <form method='GET' action='<?php url_allegrograph(true); ?>'>
     <div class="field">
         <label>Query:</label>
 <textarea name='query'>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
-select ?nome, ?idade
+select ?nome ?idade
 Where{
 ?recurso foaf:name ?nome.
 ?recurso foaf:age ?idade
