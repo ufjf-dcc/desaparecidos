@@ -183,7 +183,7 @@ class Desaparecido extends CI_Controller {
 
         //Carregando os dados para consulta no virtuoso
         /////////////////////////Alterado///////////////////////////////
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://localhost:8890/sparql/
         
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
@@ -274,7 +274,7 @@ class Desaparecido extends CI_Controller {
 
         //Carregando os dados para consulta no virtuoso
         /////////////////////////Alterado///////////////////////////////
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://localhost:8890/sparql/
         
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
@@ -292,9 +292,9 @@ class Desaparecido extends CI_Controller {
         //Retorna como um objeto mais simples
         ////////////////////Alterado//////////////////////////
         //$desaparecido = $this->virtuoso_query->convert_json_to_simple_object(0);
-        $retorno[] = $this->virtuoso_query->convert_json_to_simple_object();
+        $retorno[] = $this->virtuoso_query->convert_json_to_simple_object(0);
         $desaparecido = $retorno[0];
-
+        
         if(sizeof($desaparecido) != 0){
             $rdf = '<?xml version="1.0"?>
 <rdf:RDF
@@ -306,31 +306,31 @@ class Desaparecido extends CI_Controller {
 	xmlns:des="http://www.desaparecidos.com.br/rdf/">
 	
 	<rdf:description rdf:about="http://www.desaparecidos.ufjf.br/desaparecidos/' . $id . '">
-		<foaf:name>' . ((isset($desaparecido->nome)) ? $desaparecido->nome : "vazio"). '</foaf:name>
-		<foaf:nick>' . ((isset($desaparecido->apelido))?$desaparecido->apelido:""). '</foaf:nick>
-		<foaf:birthday>' .((isset($desaparecido->data_nascimento))?$desaparecido->data_nascimento:"") . '</foaf:birthday>
-		<foaf:gender>' .((isset($desaparecido->sexo))?$desaparecido->sexo:""). '</foaf:gender>
-		<foaf:img>' .((isset($desaparecido->imagem))?$desaparecido->imagem:""). '</foaf:img>
-		<foaf:age>' .((isset($desaparecido->idade))?$desaparecido->idade:""). '</foaf:age>
-		<des:cityDes>' .((isset($desaparecido->cidade))?$desaparecido->cidade:""). '</des:cityDes>
+		<foaf:name>' . ((!isset($desaparecido[0]->nome)) ? $desaparecido[0]->nome : "vazio"). '</foaf:name>
+		<foaf:nick>' . ((isset($desaparecido[0]->apelido))?$desaparecido[0]->apelido:""). '</foaf:nick>
+		<foaf:birthday>' .((isset($desaparecido[0]->data_nascimento))?$desaparecido[0]->data_nascimento:"") . '</foaf:birthday>
+		<foaf:gender>' .((isset($desaparecido[0]->sexo))?$desaparecido[0]->sexo:""). '</foaf:gender>
+		<foaf:img>' .((isset($desaparecido[0]->imagem))?$desaparecido[0]->imagem:""). '</foaf:img>
+		<foaf:age>' .((isset($desaparecido[0]->idade))?$desaparecido[0]->idade:""). '</foaf:age>
+		<des:cityDes>' .((isset($desaparecido[0]->cidade))?$desaparecido[0]->cidade:""). '</des:cityDes>
 		<des:cityDes rdf:resource="http://rdf.freebase.com/ns/en.juiz_de_fora" />
 		<des:cityDes rdf:resource="http://dbpedia.org/resource/Juiz_de_Fora" />
 		<des:cityDes rdf:resource="" />
 		<des:cityDes rdf:resource="" />
-		<des:stateDes>' .((isset($desaparecido->estado))?$desaparecido->estado:"") . '</des:stateDes>
-		<dbpprop:height>' .((isset($desaparecido->altura))?$desaparecido->altura:"") . '</dbpprop:height>
-		<dbpprop:weight>' .((isset($desaparecido->peso))?$desaparecido->peso:""). '</dbpprop:weight>
-		<des:skin>' .((isset($desaparecido->pele))?$desaparecido->pele:"") . '</des:skin>
-		<dbpprop:hairColor>' .((isset($desaparecido->cor_cabelo))?$desaparecido->cor_cabelo:"") . '</dbpprop:hairColor>
-		<dbpprop:eyeColor>' .((isset($desaparecido->cor_olho))?$desaparecido->cor_olho:""). '</dbpprop:eyeColor>
-		<des:moreCharacteristics>' .((isset($desaparecido->mais_caracteristicas))?$desaparecido->mais_caracteristicas:"") . '</des:moreCharacteristics>
-		<des:disappearanceDate>' .((isset($desaparecido->data_desaparecimento))?$desaparecido->data_desaparecimento:""). '</des:disappearanceDate>
-		<des:disappearancePlace>' .((isset($desaparecido->local_desaparecimento))?$desaparecido->local_desaparecimento:"") . '</des:disappearancePlace>
-		<des:circumstanceLocation>' .((isset($desaparecido->circunstancia_desaparecimento))?$desaparecido->circunstancia_desaparecimento:"") . '</des:circumstanceLocation>
-		<des:dateLocation>' .((isset($desaparecido->data_localizacao))?$desaparecido->data_localizacao:""). '</des:dateLocation>
-		<des:additionalData>' .((isset($desaparecido->dados_adicionais))?$desaparecido->dados_adicionais:""). '</des:additionalData>
-		<des:status>' .((isset($desaparecido->status))?$desaparecido->status:""). '</des:status>
-		<des:source>' .((isset($desaparecido->fonte))?$desaparecido->fonte:""). '</des:source>
+		<des:stateDes>' .((isset($desaparecido[0]->estado))?$desaparecido[0]->estado:"") . '</des:stateDes>
+		<dbpprop:height>' .((isset($desaparecido[0]->altura))?$desaparecido[0]->altura:"") . '</dbpprop:height>
+		<dbpprop:weight>' .((isset($desaparecido[0]->peso))?$desaparecido[0]->peso:""). '</dbpprop:weight>
+		<des:skin>' .((isset($desaparecido[0]->pele))?$desaparecido[0]->pele:"") . '</des:skin>
+		<dbpprop:hairColor>' .((isset($desaparecido[0]->cor_cabelo))?$desaparecido[0]->cor_cabelo:"") . '</dbpprop:hairColor>
+		<dbpprop:eyeColor>' .((isset($desaparecido[0]->cor_olho))?$desaparecido[0]->cor_olho:""). '</dbpprop:eyeColor>
+		<des:moreCharacteristics>' .((isset($desaparecido[0]->mais_caracteristicas))?$desaparecido[0]->mais_caracteristicas:"") . '</des:moreCharacteristics>
+		<des:disappearanceDate>' .((isset($desaparecido[0]->data_desaparecimento))?$desaparecido[0]->data_desaparecimento:""). '</des:disappearanceDate>
+		<des:disappearancePlace>' .((isset($desaparecido[0]->local_desaparecimento))?$desaparecido[0]->local_desaparecimento:"") . '</des:disappearancePlace>
+		<des:circumstanceLocation>' .((isset($desaparecido[0]->circunstancia_desaparecimento))?$desaparecido[0]->circunstancia_desaparecimento:"") . '</des:circumstanceLocation>
+		<des:dateLocation>' .((isset($desaparecido[0]->data_localizacao))?$desaparecido[0]->data_localizacao:""). '</des:dateLocation>
+		<des:additionalData>' .((isset($desaparecido[0]->dados_adicionais))?$desaparecido[0]->dados_adicionais:""). '</des:additionalData>
+		<des:status>' .((isset($desaparecido[0]->status))?$desaparecido[0]->status:""). '</des:status>
+		<des:source>' .((isset($desaparecido[0]->fonte))?$desaparecido[0]->fonte:""). '</des:source>
 	</rdf:description>
 </rdf:RDF>';
             $this->load->helper('download');

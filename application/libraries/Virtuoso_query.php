@@ -9,7 +9,7 @@ class Virtuoso_query {
     //application/sparql-results+json
     function __construct() {
         $this->format = 'application/sparql-results+json';
-        $this->http = 'http://172.18.40.9:10035/repositories/desaparecidos1';//http://localhost:8890/sparql/ //
+        $this->http = 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://localhost:8890/sparql/ //
     }
 
     public function load_query_sparql($query) {

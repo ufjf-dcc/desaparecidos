@@ -10,17 +10,17 @@ if ( ! function_exists('url_virtuoso'))
             $url = substr($url,0, $size-1);
 
             if($echoC)
-                echo $url . ':10035/repositories/desaparecidos1';//8890
+                echo $url . ':10035/repositories/desaparecidos2';//8890
             else
-                return $url . ':10035/repositories/desaparecidos1';//8890
+                return $url . ':10035/repositories/desaparecidos2';//8890
 	}
         
        function url_allegrograph($echoC = false){
          
            if($echoC)
-                echo 'http://172.18.40.9:10035/repositories/desaparecidos1';
+                echo 'http://172.18.40.9:10035/repositories/desaparecidos2';
             else
-                return 'http://172.18.40.9:10035/repositories/desaparecidos1';
+                return 'http://172.18.40.9:10035/repositories/desaparecidos2';
        }
 }
 
@@ -30,9 +30,9 @@ if ( ! function_exists('get_graph'))
 	function get_graph($echoC = false)
 	{
 		if($echoC)
-                    echo 'http://172.18.40.9:10035/repositories/desaparecidos1';//http://desaparecidos.ice.ufjf.br:8890/DES#
+                    echo 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://desaparecidos.ice.ufjf.br:8890/DES#
                 else
-                    return 'http://172.18.40.9:10035/repositories/desaparecidos1';//http://desaparecidos.ice.ufjf.br:8890/DES#
+                    return 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://desaparecidos.ice.ufjf.br:8890/DES#
 	}
 }
 

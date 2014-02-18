@@ -76,7 +76,7 @@ class Buscar extends CI_Controller {
         
 //////////////////////---------ALTERACAO--------------------////////////////
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');// http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');// http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -179,7 +179,7 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -237,7 +237,7 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -259,7 +259,7 @@ class Buscar extends CI_Controller {
         /*Concatenando string que formar a url*/
 	$endereco = 'SELECT (COUNT(distinct ?s) AS ?no) { ?s a []  }';
         $url = urlencode($endereco);
-	$sparqlURL = 'http://172.18.40.9:10035/repositories/desaparecidos1?query='.$url.'+limit+10';
+	$sparqlURL = 'http://172.18.40.9:10035/repositories/desaparecidos2?query='.$url.'+limit+10';
 	
 	/*Setando o cabecalho da requisicao */
 	$curl = curl_init();
