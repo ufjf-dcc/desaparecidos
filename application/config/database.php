@@ -57,10 +57,10 @@ $dados = new Constant;
 	$desa = getProperty($dados->DB_DESA);
 
 
-$db['default']['hostname'] = '$host';//http://172.18.10.52:8890/conductor/
-$db['default']['username'] = '$user';//dba
-$db['default']['password'] = '$pass';//
-$db['default']['database'] = '$desa';//
+$db['default']['hostname'] = '$host';
+$db['default']['username'] = '$user';
+$db['default']['password'] = '$pass';
+$db['default']['database'] = '$desa';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
