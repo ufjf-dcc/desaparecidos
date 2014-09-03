@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 if ( ! function_exists('url_virtuoso'))
 {
 	function url_virtuoso($echoC = false)
@@ -9,10 +10,18 @@ if ( ! function_exists('url_virtuoso'))
             $url = substr($url,0, $size-1);
 
             if($echoC)
-                echo $url . ':8890';
+                echo $url . ':10035/repositories/desaparecidos2';//8890
             else
-                return $url . ':8890';
+                return $url . ':10035/repositories/desaparecidos2';//8890
 	}
+        
+       function url_allegrograph($echoC = false){
+         
+           if($echoC)
+                echo 'http://172.18.40.9:10035/repositories/desaparecidos2';
+            else
+                return 'http://172.18.40.9:10035/repositories/desaparecidos2';
+       }
 }
 
 
@@ -21,9 +30,9 @@ if ( ! function_exists('get_graph'))
 	function get_graph($echoC = false)
 	{
 		if($echoC)
-                    echo 'http://desaparecidos.ice.ufjf.br:8890/DES#';
+                    echo 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://desaparecidos.ice.ufjf.br:8890/DES#
                 else
-                    return 'http://desaparecidos.ice.ufjf.br:8890/DES#';
+                    return 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://desaparecidos.ice.ufjf.br:8890/DES#
 	}
 }
 
@@ -31,10 +40,11 @@ if ( ! function_exists('get_schema'))
 {
 	function get_schema($echoC = false)
 	{
+            ////////////////////////////////////alterado///////////////////////
 		if($echoC)
-                    echo 'http://desaparecidos.ice.ufjf.br/desaparecido/';
+                    echo 'http://www.desaparecidos.com.br/rdf/';//http://desaparecidos.ice.ufjf.br/desaparecido/ 
                 else
-                    return 'http://desaparecidos.ice.ufjf.br/desaparecido/';
+                    return 'http://www.desaparecidos.com.br/rdf/';//http://desaparecidos.ice.ufjf.br/desaparecido/ http://172.18.40.9:10035/repositories/desaparecidos1
 	}
 }
 

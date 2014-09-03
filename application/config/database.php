@@ -48,8 +48,13 @@ $active_group = 'default';
 $active_record = TRUE;
 
 include 'properties.php';
+<<<<<<< HEAD
 	
 	$dados = new Constant;
+=======
+
+$dados = new Constant;
+>>>>>>> 0a5cb583163a08a9d30a7a8a27c68616187d27c7
 
 	$host = getProperty($dados->DB_HOST);
 	$user = getProperty($dados->DB_USER);
@@ -57,10 +62,17 @@ include 'properties.php';
 	$desa = getProperty($dados->DB_DESA);
 
 
+<<<<<<< HEAD
 $db['default']['hostname'] = $host;
 $db['default']['username'] = $user;
 $db['default']['password'] = $pass;
 $db['default']['database'] = $desa;
+=======
+$db['default']['hostname'] = '$host';
+$db['default']['username'] = '$user';
+$db['default']['password'] = '$pass';
+$db['default']['database'] = '$desa';
+>>>>>>> 0a5cb583163a08a9d30a7a8a27c68616187d27c7
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
