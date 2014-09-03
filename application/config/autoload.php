@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
@@ -236,4 +235,3 @@ $autoload['model'] = array('desaparecido_model');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
->>>>>>> 0a5cb583163a08a9d30a7a8a27c68616187d27c7
