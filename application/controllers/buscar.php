@@ -4,15 +4,17 @@ class Buscar extends CI_Controller {
 
     public function index(){        
         if(empty($_POST['nome'])){
-            $data['total'] = $this->total_cadastros();
+            $data['total'] = $this->total_cadastrados1();
             $this->load->view('tema/pages/busca', $data);
         }
 
     }
     
     public function ajax_search($offset = 0, $limit = 30){
+      
         //Carrega a classe de consulta no virtuoso
         $this->load->library('virtuoso_query');
+        
         //Carrega a classe para gerar consultas sparql
         $this->load->library('sparql');
 
@@ -21,6 +23,8 @@ class Buscar extends CI_Controller {
         //Defini os prefixos que serão usados
         $this->sparql->prefix("foaf", "http://xmlns.com/foaf/0.1/");
         $this->sparql->prefix("des", get_schema());
+        ///////////////////////Alterado///////////////////////////////
+        $this->sparql->prefix("dbpprop","http://dbpedia.org/property");
         
         $fields =  array(
               'foaf:name'=>'nome',
@@ -29,7 +33,7 @@ class Buscar extends CI_Controller {
               'foaf:gender'=>'sexo',
               'foaf:img'=>'imagem',
               'foaf:age'=>'idade',
-              'des:cityDes'=>'cidade',
+              //'des:cityDes'=>'cidade',
               'des:stateDes'=>'estado',
               'dbpprop:height'=>'altura',
               'dbpprop:weight'=>'peso',
@@ -69,17 +73,19 @@ class Buscar extends CI_Controller {
         $this->sparql->order("?nome");
         //processa a consulta
         $query = $this->sparql->query();
-
+        
+//////////////////////---------ALTERACAO--------------------////////////////
         //Carregando os dados para consulta no virtuoso
-        //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');// http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        $this->virtuoso_query->load_format('application/sparql-results+json');
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
         
         //Retorna o resultado no formato especificado
-        //$obj_json = $this->virtuoso_query->get_result();
+        $obj_json = $this->virtuoso_query->get_result();
+//////////////////////////////////////////////////////////////////////////////////////
 
         //Retorna como um objeto mais simples
         $data['desaparecidos'] = $this->virtuoso_query->convert_json_to_simple_object();
@@ -121,6 +127,8 @@ class Buscar extends CI_Controller {
         //Defini os prefixos que serão usados
         $this->sparql->prefix("foaf", "http://xmlns.com/foaf/0.1/");
         $this->sparql->prefix("des", get_schema());
+        ///////////////////////Alterado///////////////////////////////
+        $this->sparql->prefix("dbpprop","http://dbpedia.org/property");
         
         $fields =  array(
               'foaf:name'=>'nome',
@@ -171,10 +179,10 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        $this->virtuoso_query->load_format('application/sparql-results+json');
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
         
@@ -197,7 +205,7 @@ class Buscar extends CI_Controller {
             
             if($total > $maior){
                 $result->status = 'Situação: ' . $value->situacao;
-                $result->link = 'http://desaparecidos.ice.ufjf.br/index.php/desaparecido/html/' . $value->id;
+                $result->link = 'http://localhost/desaparecidos//index.php/desaparecido/html/' . $value->id;
                 $maior = $total;
             }
         }
@@ -229,19 +237,74 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        $this->virtuoso_query->load_format('application/sparql-results+json');
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
-
+       
         //Retorna o resultado no formato especificado
         //$obj_json = $this->virtuoso_query->get_result();
 
         //Retorna como um objeto mais simples
         $desaparecidos = $this->virtuoso_query->convert_json_to_simple_object();
         return sizeof($desaparecidos);
+    }
+    
+    //Funcao nova criada por Miria
+    public function total_cadastrados1(){
+        
+        $format = 'application/sparql-results+json';
+        /*Concatenando string que formar a url*/
+	$endereco = 'SELECT (COUNT(distinct ?s) AS ?no) { ?s a []  }';
+        $url = urlencode($endereco);
+	$sparqlURL = 'http://172.18.40.9:10035/repositories/desaparecidos2?query='.$url.'+limit+10';
+	
+	/*Setando o cabecalho da requisicao */
+	$curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $sparqlURL);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format , 'Content-Type: application/json'));
+        $resposta = curl_exec( $curl );
+        curl_close($curl);
+        
+        ///////// começando a manipulação de dados/////////////
+         $objects = array();      
+        $results = json_decode($resposta);//Decodificando o objecto json
+        
+        //pegando o valor de interesse no array//
+        foreach($results->results->bindings as $reg){// primeiro loop
+            $retorno = new stdClass();//cria uma classe generica do php
+            foreach($reg->no as $posicao){//entra no segundo loop
+		$retorno->retorno = $posicao;//faz com que a classe generica do php receba a ultima posicao do segundo loop
+				}//sai do segundo loop
+			 $objects[] = $retorno->retorno;
+            }
+            return $objects[0];
+       /* 
+        $this->load->library('virtuoso_query');
+        //Carrega a classe para gerar consultas sparql
+        $this->load->library('sparql');
+
+        //Montando a consulta SPARQL
+        $endereco = 'SELECT (COUNT(distinct ?s) AS ?no) { ?s a []  }';
+        $url = urlencode($endereco);
+	$sparqlURL = 'http://172.18.40.9:10035/repositories/desaparecidos1?query='.$url.'+limit+10';
+        
+        //Carregando os dados para consulta no virtuoso
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');
+        $this->virtuoso_query->load_graph(get_graph());
+        $this->virtuoso_query->load_query_sparql($url);
+        $this->virtuoso_query->load_format('application/sparql-results+json');
+        //Executa a query SPARQL
+        $this->virtuoso_query->execute();
+        
+        $quantidade = $this->virtuoso_query->convert_json_to_simple_object();
+        return $quantidade;
+       
+     */
+	
     }
 }
 
