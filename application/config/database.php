@@ -48,9 +48,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 include 'properties.php';
-	
-	$dados = new Constant;
-
+        $dados = new Constant;
 	$host = getProperty($dados->DB_HOST);
 	$user = getProperty($dados->DB_USER);
 	$pass = getProperty($dados->DB_PASS);

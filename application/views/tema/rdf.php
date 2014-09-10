@@ -1,12 +1,16 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <rdf:RDF
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:foaf="http://xmlns.com/foaf/0.1/" 
 	xmlns:dbpprop="http://dbpedia.org/property/"
 	xmlns:being="http://purl.org/ontomedia/ext/common/being#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
-	xmlns:des="http://www.desaparecidos.com.br/rdf/">
-	
+	xmlns:des="http://www.desaparecidos.com.br/rdf/
+        rdf/">
+<?php	
+    $nome = $desaparecido->nome;
+    echo'$nome';
+    ?>
 	<rdf:description rdf:about="http://www.desaparecidos.ufjf.br/desaparecidos/3">
 		<foaf:name><?php echo $desaparecido->nome ?></foaf:name>
 		<foaf:nick><?php echo $desaparecido->apelido ?></foaf:nick>

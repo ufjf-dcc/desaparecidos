@@ -5,7 +5,6 @@
 		public $DB_USER = "db.user=";
 		public $DB_PASS = "db.pass=";
 		public $DB_DESA = "db.desa=";
-
 	}	
 
 	function getProperty($string){

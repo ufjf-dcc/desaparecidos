@@ -28,6 +28,9 @@ class Access extends CI_Controller {
         //Defini os prefixos que serão usados
         $this->sparql->prefix("foaf", "http://xmlns.com/foaf/0.1/");
         $this->sparql->prefix("des", get_schema());
+        ///////////////////////Alterado////////////////////////////////
+        $this->sparql->prefix("dbpprop", "http://dbpedia.org/property/");
+        
         //Defini os campos quer serão exibidos
         $this->sparql->select("?id");
         $this->sparql->select("?nome");        
@@ -49,7 +52,9 @@ class Access extends CI_Controller {
         //$this->virtuoso_query->load_sparql_http('http://desaparecidos.ice.ufjf.br:8890/sparql/');
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+        //////////////////////////Alterado/////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
+        
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
@@ -115,11 +120,14 @@ class Access extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://localhost:8890/sparql/');
+        //
+        //////////////////////////Alterado/////////////////////
+        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
         
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
-        $this->virtuoso_query->load_format('application/json');
+         //////////////////////////Alterado/////////////////////
+        $this->virtuoso_query->load_format('application/sparql-results+json');//application/json
         //Executa a query SPARQL
         $this->virtuoso_query->execute();
 
