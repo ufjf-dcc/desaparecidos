@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+include("properties.php");
 
 class Desaparecido extends CI_Controller {
 
@@ -183,8 +184,9 @@ class Desaparecido extends CI_Controller {
 
         //Carregando os dados para consulta no virtuoso
         /////////////////////////Alterado///////////////////////////////
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://localhost:8890/sparql/
-        
+        $dados = new Constant;
+        $this->virtuoso_query->load_sparql_http(getProperty($dados->DB_HOST));//http://localhost:8890/sparql/
+        //'http://localhost:10035/repositories/desaparecidos'
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
          ///////////////////////Alterado///////////////////////////////
@@ -274,8 +276,9 @@ class Desaparecido extends CI_Controller {
 
         //Carregando os dados para consulta no virtuoso
         /////////////////////////Alterado///////////////////////////////
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://localhost:8890/sparql/
-        
+        $dados = new Constant;
+        $this->virtuoso_query->load_sparql_http(getProperty($dados->DB_HOST));//http://localhost:8890/sparql/
+        //'http://localhost:10035/repositories/desaparecidos'
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         

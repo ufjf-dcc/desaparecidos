@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+include("properties.php");
 
 class Buscar extends CI_Controller {
 
@@ -11,7 +12,7 @@ class Buscar extends CI_Controller {
     }
     
     public function ajax_search($offset = 0, $limit = 30){
-      
+        
         //Carrega a classe de consulta no virtuoso
         $this->load->library('virtuoso_query');
         
@@ -76,7 +77,8 @@ class Buscar extends CI_Controller {
         
 //////////////////////---------ALTERACAO--------------------////////////////
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');// http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $dados = new Constant;
+        $this->virtuoso_query->load_sparql_http(getProperty($dados->DB_HOST));// http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -179,7 +181,7 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $this->virtuoso_query->load_sparql_http(getProperty($dados->DB_HOST));//http://desaparecidos.ice.ufjf.br:8890/sparql/
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -205,13 +207,13 @@ class Buscar extends CI_Controller {
             
             if($total > $maior){
                 $result->status = 'Situação: ' . $value->situacao;
-                $result->link = 'http://localhost/desaparecidos//index.php/desaparecido/html/' . $value->id;
-                $maior = $total;
+                $dados = new Constant;
+                $result->link = getProperty($dados->DB_HOST) . $value->id;
+                $maior = $total;//http://localhost:10035/repositories/desaparecidos
             }
         }
         echo  json_encode($result);
     }
-    
     public function total_cadastros(){
         $this->load->library('virtuoso_query');
         //Carrega a classe para gerar consultas sparql
@@ -237,7 +239,9 @@ class Buscar extends CI_Controller {
         $query = $this->sparql->query();
 
         //Carregando os dados para consulta no virtuoso
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos2');//http://desaparecidos.ice.ufjf.br:8890/sparql/
+        $dados = new Constant;
+        $this->virtuoso_query->load_sparql_http(getProperty($dados->DB_HOST));//http://desaparecidos.ice.ufjf.br:8890/sparql/
+        //'http://localhost:10035/repositories/desaparecidos'
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
         $this->virtuoso_query->load_format('application/sparql-results+json');
@@ -251,7 +255,6 @@ class Buscar extends CI_Controller {
         $desaparecidos = $this->virtuoso_query->convert_json_to_simple_object();
         return sizeof($desaparecidos);
     }
-    
     //Funcao nova criada por Miria
     public function total_cadastrados1(){
         
@@ -259,13 +262,14 @@ class Buscar extends CI_Controller {
         /*Concatenando string que formar a url*/
 	$endereco = 'SELECT (COUNT(distinct ?s) AS ?no) { ?s a []  }';
         $url = urlencode($endereco);
-	$sparqlURL = 'http://172.18.40.9:10035/repositories/desaparecidos2?query='.$url.'+limit+10';
-	
+        $dados = new Constant;
+	$sparqlURL = getProperty($dados->DB_HOST).'?query='.$url.'+limit+10';
+	//http://localhost:10035/repositories/desaparecidos
 	/*Setando o cabecalho da requisicao */
 	$curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $sparqlURL);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
-        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format , 'Content-Type: application/json'));
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format , 'Content-Type: application/sparql-results+json'));
         $resposta = curl_exec( $curl );
         curl_close($curl);
         

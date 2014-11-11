@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+include("properties.php");
 
 class Access extends CI_Controller {
 
@@ -122,8 +123,9 @@ class Access extends CI_Controller {
         //Carregando os dados para consulta no virtuoso
         //
         //////////////////////////Alterado/////////////////////
-        $this->virtuoso_query->load_sparql_http('http://172.18.40.9:10035/repositories/desaparecidos1');//http://localhost:8890/sparql/
-        
+        $dados = new Constant;
+        $this->virtuoso_query->load_sparql_http($dados->DB_HOST);//http://localhost:8890/sparql/
+        //'http://172.18.40.9:10035/repositories/desaparecidos1'
         $this->virtuoso_query->load_graph(get_graph());
         $this->virtuoso_query->load_query_sparql($query);
          //////////////////////////Alterado/////////////////////
