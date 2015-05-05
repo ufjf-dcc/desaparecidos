@@ -22,11 +22,14 @@ class Fale_conosco extends CI_Controller {
             $mail->Port = 465;
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = "ssl";
-            $mail->Username = "desaparecidos.ufjf@gmail.com";
-            $mail->Password = "get2011abc";
+            //Add SMTP User
+            $mail->Username = "";
+            //Add SMTP Pass
+            $mail->Password = "";
             $mail->From = $_POST['email'];
             $mail->FromName = $_POST['nome'];
-            $mail->AddAddress("adrianodelvoux@gmail.com",$_POST['nome']);
+            //Add mail to
+            $mail->AddAddress("",$_POST['nome']);
             $mail->WordWrap = 50;
             $mail->IsHTML(true);
             $mail->Subject = "Contato Desaparecidos - UFJF";
