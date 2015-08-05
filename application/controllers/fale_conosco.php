@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Fale_conosco extends CI_Controller {
-
+	
     public function index(){
+
         $data['breadcrumbs'][] = array('title' => 'Página principal', 'link' => '');
         $data['breadcrumbs'][] = array('title' => 'Fale conosco', 'link' => '');
         $data['title'] = 'Fale conosco';
@@ -22,11 +23,13 @@ class Fale_conosco extends CI_Controller {
             $mail->Port = 465;
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = "ssl";
-            $mail->Username = "desaparecidos.ufjf@gmail.com";
-            $mail->Password = "get2011abc";
+            // inserir o login do gmail ex.: teste@gmail.com
+            $mail->Username = "";
+            // inserir a senha do gmail
+            $mail->Password = "";
             $mail->From = $_POST['email'];
             $mail->FromName = $_POST['nome'];
-            $mail->AddAddress("adrianodelvoux@gmail.com",$_POST['nome']);
+            $mail->AddAddress("jairo.souza"."@"."ufjf.edu".".br",$_POST['nome']);
             $mail->WordWrap = 50;
             $mail->IsHTML(true);
             $mail->Subject = "Contato Desaparecidos - UFJF";

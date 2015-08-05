@@ -32,7 +32,6 @@
     <div class="desenvolvimento">
     	<div class="center-layout">
             <div class="copyR">© Projeto Desaparecidos - UFJF</div>
-            <div class="autor">Web Master - Adriano Delvoux</div>
         </div>
     </div>
 </div>
