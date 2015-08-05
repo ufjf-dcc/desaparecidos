@@ -205,22 +205,22 @@
     }
 
 
-    foreach( $html->find('li[class="crianca feminino encontrada"]') as $boy){ // para entrar nesse caso deve ser menina e estar encontrada
+    foreach( $html->find('li[class="crianca feminino encontrada"]') as $girl){ // para entrar nesse caso deve ser menina e estar encontrada
         
         $p = new Pessoa();       
         $p->sexo = "Feminino";
         $p->situacao = "Encontrada";
         
         // PEGANDO O NOME DA MENINA
-        $nome = $boy->find('h6');
+        $nome = $girl->find('h6');
         $p->nome = $nome[0]->plaintext;
         
         //IMAGEM
-        $img = $boy->find('img');
+        $img = $girl->find('img');
         $p->imagem = $img[0]->src;
         
         // CIDADE/ESTADO
-        $cidadestado = $boy->find('small');
+        $cidadestado = $girl->find('small');
         $cityes = $cidadestado[0]->plaintext;
         
         $vet = explode("/", $cityes );
@@ -230,7 +230,7 @@
         
         
         // ACESSANDO A PAGINA ESPECIFICA
-        $html2 = file_get_html($urlBase.($boy->id));
+        $html2 = file_get_html($urlBase.($girl->id));
         
         
         // PEGANDO A DATA DO DESAPARECIMENTO
@@ -254,7 +254,7 @@
         
         
         // A FONTE É A PRÓPRIA PAGINA GERAL POIS NA ESPECIFICA NAO TEM IDENTIFICAÇÃO DE ENCONTRADA
-        $p->fonte = $urlBase.($boy->id);
+        $p->fonte = $urlBase.($girl->id);
         $cont++;    
             
         echo $p->nome."<br>";

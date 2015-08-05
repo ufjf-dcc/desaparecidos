@@ -17,7 +17,7 @@
             $aux = explode(":", $texto);
             return $aux[1];
         }
-        //echo "3";
+        
         $urlBase = "http://www.pm.sc.gov.br/desaparecidos/consulta-desaparecidos.php?&p_init="; 
         // guardo a url da página
         for( $i=0; $i<=90; $i=$i+10){ // $i=0; $i<=90; $i=$i+10

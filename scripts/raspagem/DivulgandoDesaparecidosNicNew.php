@@ -243,8 +243,8 @@
                         
                     
                 }
-    echo "<br>Num visitados : ".$cont1;
-    echo "<br>Num aprovados : ".$cont;
+    //echo "<br>Num visitados : ".$cont1;
+    //echo "<br>Num aprovados : ".$cont;
     //echo "<br> Ultimo visitado: ".$x;
 
 	?>

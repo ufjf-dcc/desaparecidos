@@ -10,7 +10,7 @@
     include("simple_html_dom/simple_html_dom.php");
     
     // colocar o login e senha do banco 
-    $login = "root:abc123"; //login:senha
+    $login = ""; //login:senha
 
     // ATUALIZO O STATUS DA PESSOA NO BANCO PARA ENCONTRADA
     function setEncontrado($id){
@@ -64,7 +64,7 @@
         curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format ));
         $resposta = curl_exec( $curl );
 		curl_close($curl);
-        echo "Done";
+        //echo "Done";
     }
 
     
@@ -110,7 +110,9 @@
 
     $dados = $respostaNew->results;
     
-
+    /* texto para casamento de padrão, identificar os desaparecidos que possuem
+     * o site abaixo como fonte
+     */
     $texto = "desaparecidos.mg.gov.br";
         
 
