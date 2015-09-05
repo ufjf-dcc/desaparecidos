@@ -13,41 +13,41 @@ $login = ""; // login:senha
             public $estado;
             public $altura;
             public $peso;
-	        public $pele;
+	    public $pele;
             public $cor_cabelo;
             public $cor_olho;
-	        public $mais_caracteristicas;
+	    public $mais_caracteristicas;
             public $data_desaparecimento;
             public $local_desaparecimento;
-	        public $circunstancia_desaparecimento;
+	    public $circunstancia_desaparecimento;
             public $data_localizacao;
             public $dados_adicionais;
-	        public $situacao;
+	    public $situacao;
             public $fonte;
         }
         
         function echoes(Pessoa $p){
-                        echo "Imagem: ".$p->imagem."<br>";
-                        echo "Situacao: ".$p->situacao."<br>";
-                        echo "Nome: ".$p->nome."<br>";
-                        echo "Apelido: ".$p->apelido."<br>";
-                        echo "Idade: ". $p->idade."<br>";
-                        echo "dataNasc: ".$p->datanasc."<br>";
-                        echo "sexo: ".$p->sexo."<br>";
-                        echo "mais carac: ".$p->mais_caracteristicas."<br>";
-                        echo "altura: ".$p->altura."<br>";
-                        echo "peso: ".$p->peso."<br>";
-                        echo "cor_olho: ".$p->cor_olho."<br>";
-                        echo "cor_cabelo: ".$p->cor_cabelo."<br>";
-                        echo "cor_pele: ".$p->pele."<br>";
-                        echo "estado: ".$p->estado."<br>";
-                        echo "cidade: ".$p->cidade."<br>";
-                        echo "data_des: ".$p->data_desaparecimento."<br>";
-                        echo "local_des: ".$p->local_desaparecimento."<br>";
-                        echo "dados adiconais: ".$p->dados_adicionais."<br>";
-                        echo "data_localizacao: ".$p->data_localizacao."<br>";
-                        echo "circunstancia_des: ".$p->circunstancia_desaparecimento."<br>";
-                        echo "fonte: ".$p->fonte."<br>";
+                        echo "Imagem: |".$p->imagem."|<br>";
+                        echo "Situacao: |".$p->situacao."|<br>";
+                        echo "Nome: |".$p->nome."|<br>";
+                        echo "Apelido: |".$p->apelido."|<br>";
+                        echo "Idade: |". $p->idade."|<br>";
+                        echo "dataNasc: |".$p->datanasc."|<br>";
+                        echo "sexo: |".$p->sexo."|<br>";
+                        echo "mais carac: |".$p->mais_caracteristicas."|<br>";
+                        echo "altura: |".$p->altura."|<br>";
+                        echo "peso: |".$p->peso."|<br>";
+                        echo "cor_olho: |".$p->cor_olho."|<br>";
+                        echo "cor_cabelo: |".$p->cor_cabelo."|<br>";
+                        echo "cor_pele: |".$p->pele."|<br>";
+                        echo "estado: |".$p->estado."|<br>";
+                        echo "cidade: |".$p->cidade."|<br>";
+                        echo "data_des: |".$p->data_desaparecimento."|<br>";
+                        echo "local_des: |".$p->local_desaparecimento."|<br>";
+                        echo "dados adiconais: |".$p->dados_adicionais."|<br>";
+                        echo "data_localizacao: |".$p->data_localizacao."|<br>";
+                        echo "circunstancia_des: |".$p->circunstancia_desaparecimento."|<br>";
+                        echo "fonte: |".$p->fonte."|<br>";
                         echo "-----------------------------------------------"."<br>";
             }
         
@@ -59,7 +59,6 @@ $login = ""; // login:senha
         $data = $aux.$data.$aux;
         $cidade = $aux.$cidade.$aux;
         $idade = $aux.$idade.$aux;
-        $datanasc = $aux.$datanasc.$aux;
         $i = $aux."i".$aux;
         /* select ?id {?id foaf:name ?name.
 		  ?id des:disappearanceDate ?disappearanceDate.
@@ -80,13 +79,15 @@ $login = ""; // login:senha
            			}";
            			
                 $url = urlencode($endereco);
-        	$sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url.'+limit+1';
+        	$sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url.'+limit+1';
 
                 $curl = curl_init();
                 //curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);
                 
                 //definimos a URL a ser usada
 	    	curl_setopt($curl, CURLOPT_URL, $sparqlURL);
+                
+                curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);
                 
                 // define que o conteúdo obtido deve ser retornado em vez de exibido
 	    	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
@@ -123,9 +124,9 @@ $login = ""; // login:senha
                 $consulta = "PREFIX foaf:<http://xmlns.com/foaf/0.1/>
                              PREFIX des:<http://www.desaparecidos.com.br/rdf/>  
 			     PREFIX dbpprop:<http://dbpedia.org/property/>
-                             select ?id where{ ?id des:id ?p} limit 1";
+                             select ?x where{ ?id des:id ?x} order by desc(xsd:int(?x)) limit 1";
                 $url = urlencode($consulta);
-                $sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url;//.'+limit+1';
+                $sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url;//.'+limit+1';
                 
                 $curl = curl_init();
 		//curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);	
@@ -136,6 +137,8 @@ $login = ""; // login:senha
                 // define que o conteúdo obtido deve ser retornado em vez de exibido
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
 	    	
+                curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);
+                
                 // define o formato
                 curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format ));
 	    	
@@ -143,25 +146,21 @@ $login = ""; // login:senha
                 $resposta = curl_exec( $curl );
                 
                 //fecho o curl
-	    	curl_close($curl);
-               
-                // tiro o link
-                $resposta = str_replace("http://www.desaparecidos.ufjf.br/desaparecidos/","", $resposta);
-                $resposta = str_replace("http://www.desaparecidos.com.br/rdf/", "", $resposta);
+	    	    curl_close($curl);
+                //echo $resposta;
                 
                  
-                //echo "<br>$$$".$resposta."$$$<br>";
                 //var_dump($resposta);
                 
                 $jsonfile = json_decode($resposta);
-                //echo "jsonfile: ".$jsonfile."<br>";
                 $jsonfile = $jsonfile->results;
                 $jsonfile = $jsonfile->bindings[0];
-                $jsonfile = $jsonfile->id;
+                $jsonfile = $jsonfile->x;
                 $jsonfile = $jsonfile->value;
                 
                 $id = (int)$jsonfile;
                 return $id;
+                
                 //fim da getMaiorID
         }
         
@@ -252,15 +251,16 @@ $login = ""; // login:senha
                           $endereco = $endereco.$prefix." des:source \"".$p->fonte."\". }";
             
                         //echo "<br>".$endereco."<br>";
-                        
+                        //echo $endereco."<br><br>";
                         $url = urlencode($endereco);
-                        $sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url.'';
+                        //echo $url."<br><br>";
+                        $sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url.'';
                         //echo "teste ok, nome : ". $p->nome;
                         
-			    $curl = curl_init();
-			    curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);	
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);	
 		    	curl_setopt($curl, CURLOPT_URL, $sparqlURL);
-			    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST"); 
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST"); 
 		    	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
 		    	curl_setopt($curl,CURLOPT_HTTPHEADER,array('Accept: '.$format ));
 		    	$resposta = curl_exec( $curl );
@@ -305,7 +305,7 @@ $login = ""; // login:senha
 					} ";
 					
 		$url = urlencode($endereco);
-		$sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url.'+limit+1';
+		$sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url.'+limit+1';
 
 		
 		$curl = curl_init();
@@ -314,6 +314,8 @@ $login = ""; // login:senha
                 //definimos a URL a ser usada
                 curl_setopt($curl, CURLOPT_URL, $sparqlURL);
 	    	
+                curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);	
+                
                 // define que o conteúdo obtido deve ser retornado em vez de exibido
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
 	    	
@@ -420,7 +422,7 @@ $login = ""; // login:senha
 						;
                         //echo $endereco."<br>"."<br>"."<br>";
                         $url = urlencode($endereco);
-			$sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url.'';		
+			$sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url.'';		
 
 			// deleta o desaparecido do banco
 			$curl = curl_init();
@@ -461,7 +463,7 @@ $login = ""; // login:senha
                         
                         //echo $endereco."<br>";
                         $url = urlencode($endereco);
-			$sparqlURL = 'http://localhost:10035/repositories/desaparecidos?query='.$url.'';		
+			$sparqlURL = 'http://localhost:10035/repositories/desaparecidos2?query='.$url.'';		
                         
                         $curl = curl_init();
                             curl_setopt($curl, CURLOPT_USERPWD, $GLOBALS['login']);	
