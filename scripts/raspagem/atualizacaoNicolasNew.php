@@ -1,7 +1,12 @@
+<html>
+ <head>
+  <meta  charset=utf-8 /> 
+  <title> Raspagem do site divulgando desaparecidos  </title>
+ </head>
+ <body>
 <?php
 error_reporting(E_ALL);
-//inserir login e senha do banco de dados
-$login = ""; // login:senha
+$login = "root:abc123";
     class Pessoa{
             public $nome; 
             public $apelido;
@@ -220,8 +225,10 @@ $login = ""; // login:senha
                 
 		
                 $Newid = getMaiorId();
+                //echo "maior id deve ser 1089, o maior id eh: ". $Newid;
                 $Newid++;
                 
+                //echo "##".$Newid."##";
                 
                 $prefix = "<http://www.desaparecidos.ufjf.br/desaparecidos/".$Newid.">";
                 $endereco = "PREFIX foaf:<http://xmlns.com/foaf/0.1/>
@@ -231,19 +238,19 @@ $login = ""; // login:senha
                                   ".$prefix." foaf:name \"".$p->nome."\".";
                 
                         if ( strlen($p->apelido) > 0 ){  $endereco = $endereco .$prefix." foaf:nick \"".$p->apelido."\".";  }
-			if ( strlen($p->datanasc) > 0 ){  $endereco = $endereco .$prefix." foaf:birthday \"".$p->datanasc."\".";  }
-			if ( strlen($p->sexo) > 0 ){  $endereco = $endereco .$prefix." foaf:gender \"".$p->sexo."\".";  }
-			if ( strlen($p->imagem) > 0 ){  $endereco = $endereco .$prefix." foaf:img \"".$p->imagem."\".";  }
-			if ( strlen($p->idade) > 0 ){  $endereco = $endereco .$prefix." foaf:age \"".$p->idade."\".";  }
-			if ( strlen($p->cidade) > 0 ){  $endereco = $endereco .$prefix." des:cityDes \"".$p->cidade."\".";  }
-			if ( strlen($p->estado) > 0 ){  $endereco = $endereco .$prefix." des:stateDes \"".$p->estado."\".";  }
-			if ( strlen($p->altura) > 0 ){  $endereco = $endereco .$prefix." dbpprop:height \"".$p->altura."\".";  }
-			if ( strlen($p->peso) > 0 ){  $endereco = $endereco .$prefix." dbpprop:weight \"".$p->peso."\".";  }
-			if ( strlen($p->pele) > 0 ){  $endereco = $endereco .$prefix." des:skin \"".$p->pele."\".";  }
-			if ( strlen($p->cor_cabelo) > 0 ){  $endereco = $endereco .$prefix." dbpprop:hairColor \"".$p->cor_cabelo."\".";  }
-			if ( strlen($p->cor_olho) > 0 ){  $endereco = $endereco .$prefix." dbpprop:eyeColor \"".$p->cor_olho."\".";  }
-			if ( strlen($p->mais_caracteristicas) > 0 ){  $endereco = $endereco .$prefix." des:moreCharacteristics \"".$p->mais_caracteristicas."\".";  }
-			if ( strlen($p->data_desaparecimento) > 0 ){  $endereco = $endereco .$prefix." des:disappearanceDate \"".$p->data_desaparecimento."\".";  }
+					    if ( strlen($p->datanasc) > 0 ){  $endereco = $endereco .$prefix." foaf:birthday \"".$p->datanasc."\".";  }
+					    if ( strlen($p->sexo) > 0 ){  $endereco = $endereco .$prefix." foaf:gender \"".$p->sexo."\".";  }
+					    if ( strlen($p->imagem) > 0 ){  $endereco = $endereco .$prefix." foaf:img \"".$p->imagem."\".";  }
+					    if ( strlen($p->idade) > 0 ){  $endereco = $endereco .$prefix." foaf:age \"".$p->idade."\".";  }
+					    if ( strlen($p->cidade) > 0 ){  $endereco = $endereco .$prefix." des:cityDes \"".$p->cidade."\".";  }
+					    if ( strlen($p->estado) > 0 ){  $endereco = $endereco .$prefix." des:stateDes \"".$p->estado."\".";  }
+					    if ( strlen($p->altura) > 0 ){  $endereco = $endereco .$prefix." dbpprop:height \"".$p->altura."\".";  }
+					    if ( strlen($p->peso) > 0 ){  $endereco = $endereco .$prefix." dbpprop:weight \"".$p->peso."\".";  }
+					    if ( strlen($p->pele) > 0 ){  $endereco = $endereco .$prefix." des:skin \"".$p->pele."\".";  }
+					    if ( strlen($p->cor_cabelo) > 0 ){  $endereco = $endereco .$prefix." dbpprop:hairColor \"".$p->cor_cabelo."\".";  }
+				        if ( strlen($p->cor_olho) > 0 ){  $endereco = $endereco .$prefix." dbpprop:eyeColor \"".$p->cor_olho."\".";  }
+				        if ( strlen($p->mais_caracteristicas) > 0 ){  $endereco = $endereco .$prefix." des:moreCharacteristics \"".$p->mais_caracteristicas."\".";  }
+				        if ( strlen($p->data_desaparecimento) > 0 ){  $endereco = $endereco .$prefix." des:disappearanceDate \"".$p->data_desaparecimento."\".";  }
                         if ( strlen($p->local_desaparecimento) > 0 ){  $endereco = $endereco .$prefix." des:disappearancePlace \"".$p->local_desaparecimento."\".";  }
                         if ( strlen($p->circunstancia_desaparecimento) > 0 ){  $endereco = $endereco .$prefix." des:circumstanceLocation \"".$p->circunstancia_desaparecimento."\".";  }
                         if ( strlen($p->data_localizacao) > 0 ){  $endereco = $endereco .$prefix." des:dateLocation \"".$p->data_localizacao."\".";  }
@@ -360,9 +367,9 @@ $login = ""; // login:senha
                 //echoes($auxPessoa);
                 $NewPessoa = new Pessoa;
                 
-                /*p é a pessoa da raspagem, auxPessoa é a pessoa que estava no banco,
-                  newPessoa é a que vai assumir o seu lugar 
-                */
+                // p é a pessoa da raspagem, auxPessoa é a pessoa que estava no banco, newPessoa é a que vai
+                //   assumir o seu lugar 
+                
                 $NewPessoa->nome = $auxPessoa->nome;
                 $NewPessoa->cidade = $auxPessoa->cidade;
                 $NewPessoa->data_desaparecimento = $auxPessoa->data_desaparecimento;
@@ -477,3 +484,5 @@ $login = ""; // login:senha
         }
 
 ?>
+ </body>
+</html>

@@ -27,8 +27,8 @@ $count = 0;
 
 
 foreach($pages as $link){
-    $domPage = file_get_html($link);
-    foreach($domPage->find(".boxDesaparecidor a") as $pessoa){
+	$domPage = file_get_html($link);
+	foreach($domPage->find(".boxDesaparecidor a") as $pessoa){
 		$urlPessoa = $urlBase.$pessoa->href;
 		$domPessoa = file_get_html($urlPessoa);		
 		$nome = $domPessoa->find(".titulo");
@@ -117,8 +117,8 @@ foreach($pages as $link){
         atualizacao_Principal($p);
         echo "------------------------<br>";
         //break;
-    }
-}
+        }
+	}
     echo " total de pessoas eh: ". $count;
 		
 ?>
