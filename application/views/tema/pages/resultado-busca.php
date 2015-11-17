@@ -13,7 +13,11 @@
     <?php
         foreach ($desaparecidos as $value) {
             echo '<tr><td>'.($value->nome).'</td>';
-            echo '<td>'.$value->sexo.'</td>';
+            if( !empty($value->sexo))
+                echo '<td>'.$value->sexo.'</td>';
+            else
+                echo '<td>Não Informado</td>';
+            
             echo '<td>'.$value->situacao.'</td>';
             echo '<td><a href="'.  site_url("desaparecido/html").'/'.$value->id.'">Detalhe</td></tr>';
         }

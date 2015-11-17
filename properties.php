@@ -8,9 +8,15 @@
 	}	
 
 	function getProperty($string){
-
-		$dados = fopen("application.properties","r");
-		
+            
+                 $parte= "application.properties";
+        
+                 while(!file_exists($parte)){
+                     $parte = "../" . $parte;
+                 }
+                 $dados = fopen($parte,"r");
+            
+            
 		while (!feof($dados)) {
 
 			$linha = fgets($dados, 4096);

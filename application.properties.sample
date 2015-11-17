@@ -1,4 +1,4 @@
-db.host= "endereço_servidor"
+db.host= "endereço_servidor_com_caminho_do_banco"
 db.user= "usuario_do_banco_de_dados"
 db.pass= "senha_banco_de_dados"
 db.desa= "nome_banco_de_dados"
