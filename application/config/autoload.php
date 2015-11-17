@@ -117,7 +117,7 @@ $autoload['model'] = array('desaparecido_model');
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
 
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -234,4 +234,4 @@ $autoload['model'] = array('desaparecido_model');
 
 
 /* End of file autoload.php */
-/* Location: ./application/config/autoload.php */
+/* Location: ./application/config/autoload.php */ ?>

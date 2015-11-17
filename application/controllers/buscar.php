@@ -59,12 +59,15 @@ class Buscar extends CI_Controller {
         //Tripla quer será retornada - Está condição deve ser satisfeita para retornar um resultado
         $this->sparql->new_ptrn("?recurso des:id ?id");
         //Condições opcionais
-        foreach($fields as $key => $value){            
+        
+	$this->sparql->new_ptrn('FILTER regex(?situacao, "Desaparecida", "i")');
+
+	foreach($fields as $key => $value){            
             $this->sparql->optional($this->sparql->new_ptrn("?recurso $key ?$value"));
         }
         
         if(isset($_POST['nome']) && ($_POST['nome'] != '')) $this->sparql->new_ptrn('FILTER regex(?nome, "'.trim($_POST['nome']).'", "i")');
-        if(isset($_POST['situacao']) && ($_POST['situacao'] != '')) $this->sparql->new_ptrn('FILTER regex(?situacao, "'.trim($_POST['situacao']).'", "i")');
+        //if(isset($_POST['situacao']) && ($_POST['situacao'] != '')) $this->sparql->new_ptrn('FILTER regex(?situacao, "'.trim($_POST['situacao']).'", "i")');
         if(isset($_POST['sexo']) && ($_POST['sexo'] != '')) $this->sparql->new_ptrn('FILTER regex(?sexo, "'.trim($_POST['sexo']).'", "i")');
         if(isset($_POST['idade']) && ($_POST['idade'] != '')) $this->sparql->new_ptrn('FILTER regex(?idade, "'.trim($_POST['idade']).'", "i")');
         
@@ -101,7 +104,7 @@ class Buscar extends CI_Controller {
         if(!isset($_GET['texto'])){
             $result->error = 1;
             $result->message = 'Nenhuma mensagem enviada';
-            echo json_encode($result);
+            //echo json_encode($result);
             return;
         }
         
@@ -212,7 +215,7 @@ class Buscar extends CI_Controller {
                 $maior = $total;//http://localhost:10035/repositories/desaparecidos
             }
         }
-        echo  json_encode($result);
+        //echo  json_encode($result);
     }
     public function total_cadastros(){
         $this->load->library('virtuoso_query');
@@ -260,7 +263,8 @@ class Buscar extends CI_Controller {
         
         $format = 'application/sparql-results+json';
         /*Concatenando string que formar a url*/
-	$endereco = 'SELECT (COUNT(distinct ?s) AS ?no) { ?s a []  }';
+	$endereco = 'PREFIX des:<http://www.desaparecidos.com.br/rdf/>
+SELECT (COUNT(distinct ?s) AS ?no) { ?s des:id ?x  }';
         $url = urlencode($endereco);
         $dados = new Constant;
 	$sparqlURL = getProperty($dados->DB_HOST).'?query='.$url.'+limit+10';
