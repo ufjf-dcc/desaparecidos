@@ -8,7 +8,7 @@
     <div>Sexo: <br /><select id="sexo" name="sexo"><option value="">Selecione uma opção</option><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option></select></div>
     <div>Idade: <br /><input id="idade" type="text" name="idade" /></div>
     <div>Data desaparecimento: <br /><input id="data-desaparecimento" type="text" name="data_desaparecimento" /></div>
-    <!--<div>Situação: <br /><select id="situacao" name="situacao"><option value="">Selecione uma opção</option><option value="Encontrada">Encontrada</option><option value="Desaparecida">Desaparecida</option></select></div> -->
+    <div>Situação: <br /><select id="situacao" name="situacao"><option value="">Selecione uma opção</option><option value="Encontrada">Encontrada</option><option value="Desaparecida">Desaparecida</option></select></div>
     <span class="btn-search" id="search">Buscar</span>
     </form>
 </div>

@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//include("properties.php");
 
 class Virtuoso_query {
     private $query;
@@ -8,12 +7,10 @@ class Virtuoso_query {
     private $http;
     private $result;
     //application/sparql-results+json
-    
     function __construct() {
         $this->format = 'application/sparql-results+json';
-        $dados = new Constant;
-        $this->http = getProperty($dados->DB_HOST) ;//http://localhost:8890/sparql/ //
-    }  //'http://localhost:10035/repositories/desaparecidos'
+        $this->http = 'http://172.18.40.9:10035/repositories/desaparecidos2';//http://localhost:8890/sparql/ //
+    }
 
     public function load_query_sparql($query) {
         $this->query = $query;
@@ -64,7 +61,7 @@ class Virtuoso_query {
         echo "</pre>";
         ////////////////////////////////////////////////////////////////////
         $curl = curl_init();
-	curl_setopt($curl, CURLOPT_URL, $sparqlURL);
+        curl_setopt($curl, CURLOPT_URL, $sparqlURL);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //Recebe o output da url como uma string
         curl_setopt($curl,CURLOPT_HTTPHEADER,array("Accept: ".$this->format));
         $this->result = curl_exec( $curl );

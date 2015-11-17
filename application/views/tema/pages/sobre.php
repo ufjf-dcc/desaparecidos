@@ -8,11 +8,11 @@
 
 <h3 style="text-align: center;">Criação de um Repositório de Dados Ligados para Filtragem de <i>Hoax</i></h3>
 
-<p style="text-align:center;">Jairo Francisco de Souza</p>
+<p style="text-align:center;">Adriano Rodrigues Delvoux Mattos, Jairo Francisco de Souza</p>
 
 <p style="text-align:center;">Departamento de Ciência da Computação – Universidade Federal de Juiz de Fora (UFJF)</p>
 
-<p style="text-align:center;">jairo.souza@ufjf.edu.br</p>
+<p style="text-align:center;">adrianodelvoux@gmail.com.br, jairo.souza@ufjf.edu.br</p>
 
 </div>
 
