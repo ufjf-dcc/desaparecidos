@@ -5,12 +5,8 @@ class Access extends CI_Controller {
 
     public function index(){
         $this->load->view('access');
-    }
-    
-    public function ajax(){
-        echo ' aSDFLKASJDF LKASDJF ASDLKF JASDLK JASDLÇKF JASDFLK JSDAF L';
-    }
-    
+    }    
+        
     public function busca_nome($nome = ''){
         $nome = urldecode($nome);
 //        $data['palavra'] = $nome;
