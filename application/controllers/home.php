@@ -28,7 +28,7 @@ Where{
 }
 ";
 
-$data=sparqlQuery($query, "http://desaparecidos.ice.ufjf.br:8890/sparql/");
+$data=sparqlQuery($query, "http://localhost:10035/catalogs/repositories/desaparecidos");
 
 print "Retrieved data:\n" . json_encode($data);
 

@@ -29,6 +29,7 @@ $fields =  array(
 <div class="detalhe">    
     <?php
         if(empty($desaparecido->imagem)) echo '<img class="img-desaparecido" src="'.base_url().'/images/img-desaparecido.png" />';
+	else echo '<img class="img-desaparecido" height="130" width="130" src="'.$desaparecido->imagem.'"/>';
         echo '<a title="Download do RDF" href="'.site_url('desaparecido/rdf/'.$id).'"><img class="img-download-rdf" src="'.base_url().'/images/rdf_icon.gif" /></a>';
         foreach($desaparecido as $key => $value){
             if($key == 'imagem') continue;
